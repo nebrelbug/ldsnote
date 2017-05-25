@@ -15,7 +15,7 @@ firebase.auth().onAuthStateChanged(function(user) {
 });
 	
 $( "#login" ).click(function() {
-if (signedIn = 1) {
+if (signedIn = 0) {
 firebase.auth().signInWithRedirect(provider);
 
 firebase.auth().getRedirectResult().then(function(result) {
@@ -36,7 +36,7 @@ firebase.auth().getRedirectResult().then(function(result) {
   var credential = error.credential;
   // ...
 });
-	else {
+	else if (signedIn = 1) {
 	userRef.remove();
 	firebase.auth().signOut().then(function() {
   location.reload();
