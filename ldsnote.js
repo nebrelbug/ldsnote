@@ -36,13 +36,14 @@ firebase.auth().getRedirectResult().then(function(result) {
   var credential = error.credential;
   // ...
 });
-	else if (signedIn = 1) {
+} if (signedIn = 1) {
 	userRef.remove();
 	firebase.auth().signOut().then(function() {
   location.reload();
 }).catch(function(error) {
   // An error happened.
 });
+}
 });	
 
 });
