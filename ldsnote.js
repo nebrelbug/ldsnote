@@ -1,5 +1,21 @@
-$( "#login" ).click(function() {
+$(document).ready(function() {
+var signedIn;
 
+firebase.auth().onAuthStateChanged(function(user) {
+  if (user) {
+	signedIn = 1;
+	uid = user.uid;
+	name = user.displayName;
+	userRef = firebase.database().ref('users/'+uid);
+    	
+	
+  } else {
+    signedIn = 0;
+  }
+});
+	
+$( "#login" ).click(function() {
+if (signedIn = 1) {
 firebase.auth().signInWithRedirect(provider);
 
 firebase.auth().getRedirectResult().then(function(result) {
@@ -20,33 +36,14 @@ firebase.auth().getRedirectResult().then(function(result) {
   var credential = error.credential;
   // ...
 });
-});
-	
-	
-	
-	firebase.auth().onAuthStateChanged(function(user) {
-  if (user) {
-	uid = user.uid;
-	name = user.displayName;
-	userRef = firebase.database().ref('users/'+uid);
-    	
-	
-  } else {
-    // User is signed out.
-    // ...
-  }
-});
-	
-$( "#signOut" ).click(function () {
+	else {
 	userRef.remove();
 	firebase.auth().signOut().then(function() {
   location.reload();
 }).catch(function(error) {
   // An error happened.
 });
-	
-});
-	
+});	
 
 });
 //V 3.1
