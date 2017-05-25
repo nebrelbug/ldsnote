@@ -7,28 +7,6 @@ var changeRef = firebase.database().ref('users/');
 var userRef;
 var signedIn;
 var currentUser = firebase.auth().currentUser;
-
-if (currentUser) {
-  signedIn = 1;
-	uid = currentUser.uid;
-	name = currentUser.displayName;
-	userRef = firebase.database().ref('users/'+uid);
-} else {
-  signedIn = 0;
-}
-
-firebase.auth().onAuthStateChanged(function(user) {
-  if (user) {
-	signedIn = 1;
-	uid = user.uid;
-	name = user.displayName;
-	userRef = firebase.database().ref('users/'+uid);
-    	
-	
-  } else {
-    signedIn = 0;
-  }
-});
 	
 $( "#login" ).click(function() {
 if (signedIn = 0) {
@@ -62,5 +40,29 @@ firebase.auth().getRedirectResult().then(function(result) {
 }
 });	
 
+
+if (currentUser) {
+  signedIn = 1;
+	uid = currentUser.uid;
+	name = currentUser.displayName;
+	userRef = firebase.database().ref('users/'+uid);
+} else {
+  signedIn = 0;
+}
+
+firebase.auth().onAuthStateChanged(function(user) {
+  if (user) {
+	signedIn = 1;
+	uid = user.uid;
+	name = user.displayName;
+	userRef = firebase.database().ref('users/'+uid);
+    	
+	
+  } else {
+    signedIn = 0;
+  }
 });
-//V 0.5
+	
+
+});
+//V 0.6
