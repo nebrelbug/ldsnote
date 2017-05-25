@@ -1,4 +1,10 @@
 $(document).ready(function() {
+	
+var provider = new firebase.auth.GoogleAuthProvider();
+var uid;
+var name;
+var changeRef = firebase.database().ref('users/');
+var userRef;
 var signedIn;
 
 firebase.auth().onAuthStateChanged(function(user) {
