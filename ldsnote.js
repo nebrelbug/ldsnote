@@ -6,6 +6,16 @@ var name;
 var changeRef = firebase.database().ref('users/');
 var userRef;
 var signedIn;
+var currentUser = firebase.auth().currentUser;
+
+if (currentUser) {
+  signedIn = 1;
+	uid = currentUser.uid;
+	name = currentUser.displayName;
+	userRef = firebase.database().ref('users/'+uid);
+} else {
+  signedIn = 0;
+}
 
 firebase.auth().onAuthStateChanged(function(user) {
   if (user) {
@@ -53,4 +63,4 @@ firebase.auth().getRedirectResult().then(function(result) {
 });	
 
 });
-//V 3.1
+//V 0.5
